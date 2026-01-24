@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spacia Cab Service - Colombo's Premium Transportation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,11 +13,29 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary-color: #1A2653;
+            --primary-dark: #0f1839;
+            --secondary-color: #25D366;
+            --accent-color: #2196F3;
+            --text-color: #333;
+            --light-text: #666;
+            --background-color: #f8f9fa;
+            --white: #ffffff;
+            --light-gray: #f1f3f4;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #5f6368;
+            --error-color: #f44336;
+            --success-color: #4caf50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            color: var(--text-color);
+            background-color: var(--background-color);
         }
         
         .container {
@@ -28,8 +46,8 @@
         }
         
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -45,9 +63,10 @@
         .logo {
             display: flex;
             align-items: center;
+            font-family: 'Montserrat', sans-serif;
             font-size: 24px;
             font-weight: 700;
-            color: #1a73e8;
+            color: var(--primary-color);
         }
         
         .logo i {
@@ -66,64 +85,131 @@
         
         nav ul li a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-color);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
         }
         
         nav ul li a:hover {
-            color: #1a73e8;
+            color: var(--primary-color);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/seed/colombo-city/1600/800.jpg');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, #1A2653 0%, #0f1839 100%);
             height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--white);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
         }
         
         .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 48px;
             margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
         
         .hero-content p {
             font-size: 20px;
             max-width: 700px;
             margin: 0 auto 30px;
+            opacity: 0.9;
         }
         
         .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: #1a73e8;
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background-color: var(--white);
+            color: var(--primary-color);
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
-            transition: background-color 0.3s;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
         .btn:hover {
-            background-color: #0d47a1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         
         .btn:disabled {
-            background-color: #9e9e9e;
+            background-color: var(--medium-gray);
+            color: var(--light-text);
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
-        .distance-calculator {
+        .btn-whatsapp {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        .btn-call {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+        
+        .btn-call:hover {
+            background-color: #0b7dda;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .section {
             padding: 80px 0;
-            background-color: white;
         }
         
         .section-title {
@@ -132,31 +218,50 @@
         }
         
         .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 36px;
             margin-bottom: 15px;
-            color: #333;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
         }
         
         .section-title p {
             font-size: 18px;
-            color: #666;
+            color: var(--light-text);
             max-width: 700px;
-            margin: 0 auto;
+            margin: 20px auto 0;
+        }
+        
+        .distance-calculator {
+            background-color: var(--white);
         }
         
         .calculator-form {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
         }
         
         .form-row {
             display: flex;
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: relative;
         }
         
@@ -169,31 +274,33 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--text-color);
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 14px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
             font-size: 16px;
+            transition: all 0.3s ease;
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #1a73e8;
-            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 38, 83, 0.1);
         }
         
         .form-group.error input,
         .form-group.error textarea {
-            border-color: #f44336;
+            border-color: var(--error-color);
         }
         
         .error-message {
-            color: #f44336;
+            color: var(--error-color);
             font-size: 14px;
             margin-top: 5px;
             display: none;
@@ -208,15 +315,15 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: white;
-            border: 1px solid #ddd;
+            background: var(--white);
+            border: 1px solid var(--medium-gray);
             border-top: none;
-            border-radius: 0 0 4px 4px;
+            border-radius: 0 0 8px 8px;
             max-height: 200px;
             overflow-y: auto;
             z-index: 10;
             display: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
         }
         
         .autocomplete-list.active {
@@ -224,134 +331,178 @@
         }
         
         .autocomplete-item {
-            padding: 12px;
+            padding: 12px 16px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
         
         .autocomplete-item:hover {
-            background-color: #f1f3f4;
+            background-color: var(--light-gray);
         }
         
         .autocomplete-item.selected {
-            background-color: #e8f0fe;
-            color: #1a73e8;
+            background-color: var(--light-gray);
+            color: var(--primary-color);
         }
         
         .calculate-btn {
             width: 100%;
-            padding: 15px;
-            background-color: #1a73e8;
-            color: white;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: var(--white);
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 18px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .calculate-btn:hover {
-            background-color: #0d47a1;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
         
         .result {
             margin-top: 30px;
-            padding: 20px;
-            background-color: #e8f0fe;
-            border-radius: 8px;
+            padding: 25px;
+            background-color: var(--light-gray);
+            border-radius: 12px;
             display: none;
+            box-shadow: var(--shadow);
         }
         
         .result h3 {
-            margin-bottom: 15px;
-            color: #1a73e8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
         }
         
         .result-item {
             display: flex;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
         }
         
         .result-item strong {
             width: 120px;
+            font-weight: 600;
+            color: var(--text-color);
         }
         
         .result-fare {
             font-weight: 700;
-            color: #1a73e8;
-            font-size: 18px;
+            color: var(--primary-color);
+            font-size: 20px;
         }
         
         .fare-note {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #c5daf0;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
             font-size: 14px;
-            color: #5f6368;
-            font-style: italic;
+            color: var(--dark-gray);
         }
         
         .fare-note-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .fare-note-item i {
-            margin-right: 8px;
+            margin-right: 10px;
             margin-top: 3px;
-            color: #5f6368;
+            color: var(--primary-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .action-buttons .btn {
+            flex: 1;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
         }
         
         .about {
-            padding: 80px 0;
-            background-color: #f8f9fa;
+            background-color: var(--background-color);
         }
         
         .about-content {
-            display: flex;
-            gap: 50px;
-            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
         }
         
         .about-text {
-            flex: 1;
-        }
-        
-        .about-image {
-            flex: 1;
-        }
-        
-        .about-image img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--light-text);
         }
         
         .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
         
         .feature {
-            flex: 1;
-            min-width: 200px;
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
         
         .feature i {
-            font-size: 24px;
-            color: #1a73e8;
-            margin-right: 15px;
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        .feature p {
+            font-size: 14px;
+            color: var(--light-text);
+            line-height: 1.5;
         }
         
         .contact {
-            padding: 80px 0;
-            background-color: white;
+            background-color: var(--white);
         }
         
         .contact-content {
@@ -379,25 +530,55 @@
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
         }
         
         .contact-item i {
             font-size: 24px;
-            color: #1a73e8;
+            color: var(--primary-color);
             margin-right: 15px;
             width: 30px;
         }
         
+        .contact-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-item p {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+        
+        .whatsapp-note {
+            background-color: rgba(37, 211, 102, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .whatsapp-note i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+        
         footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 0;
+            background-color: #1a1a1a;
+            color: var(--white);
+            padding: 60px 0 20px;
         }
         
         .footer-content {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 40px;
         }
         
         .footer-section {
@@ -406,8 +587,28 @@
         }
         
         .footer-section h3 {
-            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-section p {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
         
         .footer-section ul {
@@ -415,25 +616,32 @@
         }
         
         .footer-section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .footer-section ul li a {
             color: #bbb;
             text-decoration: none;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-section ul li a i {
+            margin-right: 10px;
+            font-size: 16px;
         }
         
         .footer-section ul li a:hover {
-            color: white;
+            color: var(--white);
         }
         
         .footer-bottom {
             text-align: center;
-            margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #555;
+            border-top: 1px solid #333;
             color: #bbb;
+            font-size: 14px;
         }
         
         .notification {
@@ -441,13 +649,14 @@
             top: 80px;
             right: 20px;
             padding: 15px 20px;
-            background-color: #4caf50;
-            color: white;
-            border-radius: 4px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            background-color: var(--success-color);
+            color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-hover);
             transform: translateX(120%);
             transition: transform 0.3s ease-out;
             z-index: 1000;
+            max-width: 300px;
         }
         
         .notification.show {
@@ -455,7 +664,7 @@
         }
         
         .notification.error {
-            background-color: #f44336;
+            background-color: var(--error-color);
         }
         
         .loading {
@@ -494,7 +703,7 @@
                 flex-direction: column;
             }
             
-            .about-content, .contact-content {
+            .contact-content {
                 flex-direction: column;
             }
             
@@ -505,6 +714,14 @@
             .footer-section {
                 margin-right: 0;
                 margin-bottom: 30px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -531,16 +748,14 @@
     
     <main>
         <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Colombo's Premium Cab Service</h1>
-                    <p>Comfortable, safe, and affordable rides with our premium Spacia cab service. Perfect for up to 4 passengers.</p>
-                    <a href="#calculator" class="btn">Calculate Distance</a>
-                </div>
+            <div class="hero-content">
+                <h1>Colombo's Premium Cab Service</h1>
+                <p>Comfortable, safe, and affordable rides with our premium Spacia cab service. Perfect for up to 4 passengers.</p>
+                <a href="#calculator" class="btn">Calculate Distance</a>
             </div>
         </section>
         
-        <section id="calculator" class="distance-calculator">
+        <section id="calculator" class="section distance-calculator">
             <div class="container">
                 <div class="section-title">
                     <h2>Distance Calculator</h2>
@@ -598,12 +813,23 @@
                                 <span>Prices without highway charges.</span>
                             </div>
                         </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-whatsapp" onclick="sendWhatsAppInquiry()">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp Inquiry
+                            </button>
+                            <button class="btn btn-call" onclick="makeCall()">
+                                <i class="fas fa-phone"></i>
+                                Call Now
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="about" class="about">
+        <section id="about" class="section about">
             <div class="container">
                 <div class="section-title">
                     <h2>About Our Service</h2>
@@ -617,31 +843,31 @@
                         <div class="features">
                             <div class="feature">
                                 <i class="fas fa-users"></i>
-                                <span>Seats up to 4 passengers</span>
+                                <h3>Seats up to 4 passengers</h3>
+                                <p>Spacious interior with comfortable seating for your group</p>
                             </div>
                             <div class="feature">
                                 <i class="fas fa-suitcase"></i>
-                                <span>Ample luggage space</span>
+                                <h3>Ample luggage space</h3>
+                                <p>Plenty of room for your luggage and belongings</p>
                             </div>
                             <div class="feature">
                                 <i class="fas fa-snowflake"></i>
-                                <span>Air-conditioned comfort</span>
+                                <h3>Air-conditioned comfort</h3>
+                                <p>Stay cool and comfortable during your journey</p>
                             </div>
                             <div class="feature">
                                 <i class="fas fa-shield-alt"></i>
-                                <span>Fully insured & safe</span>
+                                <h3>Fully insured & safe</h3>
+                                <p>Your safety is our top priority with full insurance coverage</p>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="about-image">
-                        <img src="https://picsum.photos/seed/toyota-spacia/600/400.jpg" alt="Toyota Spacia Cab">
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="contact" class="contact">
+        <section id="contact" class="section contact">
             <div class="container">
                 <div class="section-title">
                     <h2>Contact Us</h2>
@@ -650,6 +876,11 @@
                 
                 <div class="contact-content">
                     <div class="contact-form">
+                        <div class="whatsapp-note">
+                            <i class="fab fa-whatsapp"></i>
+                            <strong>Quick Booking:</strong> Fill the form below and we'll open WhatsApp with your booking details pre-filled. Just tap "Send" to confirm!
+                        </div>
+                        
                         <form id="booking-form">
                             <div class="form-group">
                                 <label for="name">Your Name *</label>
@@ -670,8 +901,9 @@
                                 <label for="message">Message</label>
                                 <textarea id="message" name="message" placeholder="Enter your pickup location, destination, and date/time"></textarea>
                             </div>
-                            <button type="submit" class="btn" id="submit-btn">
-                                <span id="submit-text">Send Booking Request</span>
+                            <button type="submit" class="btn btn-whatsapp" id="submit-btn">
+                                <i class="fab fa-whatsapp"></i>
+                                <span id="submit-text">Send Booking via WhatsApp</span>
                                 <span id="submit-loading" class="loading" style="display: none;"></span>
                             </button>
                         </form>
@@ -682,7 +914,7 @@
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Phone</h4>
-                                <p>+94 77 123 4567</p>
+                                <p>+94 78 565 7954</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -723,20 +955,20 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#calculator">Distance Calculator</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#calculator"><i class="fas fa-calculator"></i> Distance Calculator</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="#">Airport Transfers</a></li>
-                        <li><a href="#">City Tours</a></li>
-                        <li><a href="#">Long Distance Travel</a></li>
-                        <li><a href="#">Corporate Services</a></li>
+                        <li><a href="#"><i class="fas fa-plane"></i> Airport Transfers</a></li>
+                        <li><a href="#"><i class="fas fa-city"></i> City Tours</a></li>
+                        <li><a href="#"><i class="fas fa-route"></i> Long Distance Travel</a></li>
+                        <li><a href="#"><i class="fas fa-briefcase"></i> Corporate Services</a></li>
                     </ul>
                 </div>
                 
@@ -746,7 +978,7 @@
                         <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
                         <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="https://wa.me/94785657954" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
                     </ul>
                 </div>
             </div>
@@ -759,15 +991,7 @@
     
     <div id="notification" class="notification"></div>
     
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <script>
-        // Initialize EmailJS with your public key
-        (function() {
-            emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Replace with your EmailJS public key
-        })();
-        
         // Google Sheet URL - using the correct format for CSV export
         const sheetURL = 'https://docs.google.com/spreadsheets/d/1NcV1Xv85Q6B38OjabQMA42S_zsT634jdNaFGnQqsNAs/export?format=csv&gid=0';
         
@@ -776,6 +1000,11 @@
         let locations = [];
         let perKmRate = 103.00; // Default rate, will be updated from sheet
         let airportPerKmRate = 103.00; // Default airport rate, will be updated from sheet
+        let currentCalculation = null; // Store current calculation data
+        
+        // WhatsApp number (without + or 00)
+        const whatsappNumber = '94785657954';
+        const phoneNumber = '+94785657954';
         
         // Fetch data from Google Sheet
         fetch(sheetURL)
@@ -1073,6 +1302,9 @@
         
         // Display the calculation result
         function displayResult(data) {
+            // Store current calculation data for use in WhatsApp/Call functions
+            currentCalculation = data;
+            
             document.getElementById('result-from').textContent = data['From'];
             document.getElementById('result-to').textContent = data['To'];
             document.getElementById('result-distance').textContent = data['DISTANCE'];
@@ -1102,8 +1334,12 @@
                 // Format with thousands separator
                 const formattedFare = formatNumberWithCommas(estimatedFare);
                 document.getElementById('result-fare').textContent = `LKR ${formattedFare}`;
+                
+                // Store fare in calculation data
+                currentCalculation.fare = formattedFare;
             } else {
                 document.getElementById('result-fare').textContent = 'N/A';
+                currentCalculation.fare = 'N/A';
             }
             
             // Show result section
@@ -1111,6 +1347,38 @@
             
             // Scroll to result
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Send WhatsApp inquiry with calculated route
+        function sendWhatsAppInquiry() {
+            if (!currentCalculation) {
+                showNotification('Please calculate a route first', true);
+                return;
+            }
+            
+            const message = `*Route Inquiry - Spacia Cab Service*%0A%0A` +
+                `*From:* ${currentCalculation['From']}%0A` +
+                `*To:* ${currentCalculation['To']}%0A` +
+                `*Distance:* ${currentCalculation['DISTANCE']}%0A` +
+                `*Route:* ${currentCalculation['ROUTE'] || 'Standard route'}%0A` +
+                `*Estimated Fare:* ${currentCalculation.fare}%0A%0A` +
+                `I would like to book this trip. Please confirm availability.`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            showNotification('WhatsApp opened with your route details!');
+        }
+        
+        // Make a call to book
+        function makeCall() {
+            if (!currentCalculation) {
+                showNotification('Please calculate a route first', true);
+                return;
+            }
+            
+            window.location.href = `tel:${phoneNumber}`;
+            showNotification('Calling to book your trip...');
         }
         
         // Validate email format
@@ -1174,34 +1442,32 @@
             submitText.style.display = 'none';
             submitLoading.style.display = 'inline-block';
             
-            // Prepare email parameters
-            const templateParams = {
-                from_name: name,
-                from_email: email,
-                phone: phone,
-                message: message || 'No additional message provided',
-                to_email: 'steven930522@gmail.com',
-                booking_date: new Date().toLocaleString()
-            };
+            // Create WhatsApp message
+            const bookingDate = new Date().toLocaleString();
+            const whatsappMessage = `*New Booking Request - Spacia Cab Service*%0A%0A` +
+                `*Name:* ${name}%0A` +
+                `*Phone:* ${phone}%0A` +
+                `*Email:* ${email}%0A` +
+                `*Message:* ${message || 'No additional message provided'}%0A%0A` +
+                `*Booking Date:* ${bookingDate}%0A%0A` +
+                `Please confirm this booking request.`;
             
-            // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    showNotification(`Thank you ${name}! Your booking request has been received. We'll contact you soon at ${phone}.`);
-                    
-                    // Reset form
-                    document.getElementById('booking-form').reset();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    showNotification('Failed to send booking request. Please try again or call us directly.', true);
-                })
-                .finally(function() {
-                    // Hide loading state
-                    submitBtn.disabled = false;
-                    submitText.style.display = 'inline';
-                    submitLoading.style.display = 'none';
-                });
+            // Open WhatsApp with the pre-filled message
+            setTimeout(() => {
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+                
+                // Show success notification
+                showNotification(`WhatsApp opened with your booking details! Just tap "Send" to confirm your booking with ${name}.`);
+                
+                // Reset form
+                document.getElementById('booking-form').reset();
+                
+                // Hide loading state
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitLoading.style.display = 'none';
+            }, 1000);
         });
         
         // Show notification

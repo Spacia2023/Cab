@@ -204,6 +204,15 @@
             background-color: #0b7dda;
         }
         
+        .btn-contact {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-contact:hover {
+            background-color: var(--primary-dark);
+        }
+        
         .btn i {
             margin-right: 8px;
         }
@@ -569,6 +578,34 @@
             margin-right: 10px;
         }
         
+        .driver-contact {
+            background-color: rgba(26, 38, 83, 0.05);
+            border: 1px solid rgba(26, 38, 83, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .driver-contact h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .driver-contact p {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+        
+        .driver-contact .btn {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+        
         footer {
             background-color: #1a1a1a;
             color: var(--white);
@@ -723,6 +760,12 @@
             .features {
                 grid-template-columns: 1fr;
             }
+            
+            .driver-contact .btn {
+                display: block;
+                margin: 5px 0;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -749,7 +792,7 @@
     <main>
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1>Colombo's Premium Cab Service</h1>
+                <h1>Spacia Cab Service</h1>
                 <p>Comfortable, safe, and affordable rides with our premium Spacia cab service. Perfect for up to 4 passengers.</p>
                 <a href="#calculator" class="btn">Calculate Distance</a>
             </div>
@@ -803,14 +846,22 @@
                             <strong>Est. Fare:</strong>
                             <span id="result-fare" class="result-fare"></span>
                         </div>
+                        
+                        <!-- Date selection for WhatsApp inquiry -->
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="trip-date">Trip Date *</label>
+                            <input type="date" id="trip-date" name="trip-date" required>
+                            <span class="error-message">Please select your trip date</span>
+                        </div>
+                        
                         <div class="fare-note">
                             <div class="fare-note-item">
                                 <i class="fas fa-info-circle"></i>
-                                <span>The fare varies based on the distance from pickup location to drop location.</span>
+                                <span>This is an estimated fare. The final fare may vary depending on the distance between the pickup and drop-off locations. Contact us via WhatsApp or mobile for the final quotation.</span>
                             </div>
                             <div class="fare-note-item">
                                 <i class="fas fa-road"></i>
-                                <span>Prices without highway charges.</span>
+                                <span>Prices exclude/without highway charges (if any, to be borne by the customer). </span>
                             </div>
                         </div>
                         
@@ -838,7 +889,7 @@
                 
                 <div class="about-content">
                     <div class="about-text">
-                        <p>We provide premium cab services with our comfortable Toyota Spacia, serving the Colombo area and surrounding regions. With seating for up to 4 passengers, our vehicle offers ample space and a smooth ride for all your transportation needs.</p>
+                        <p>We provide premium cab services with our comfortable Suzuki Spacia, serving the Colombo area and surrounding regions. With seating for up to 4 passengers, our vehicle offers ample space and a smooth ride for all your transportation needs.</p>
                         
                         <div class="features">
                             <div class="feature">
@@ -858,8 +909,8 @@
                             </div>
                             <div class="feature">
                                 <i class="fas fa-shield-alt"></i>
-                                <h3>Fully insured & safe</h3>
-                                <p>Your safety is our top priority with full insurance coverage</p>
+                                <h3>Fully safe & customer friendly</h3>
+                                <p>Your safety is our top & only priority </p>
                             </div>
                         </div>
                     </div>
@@ -876,6 +927,21 @@
                 
                 <div class="contact-content">
                     <div class="contact-form">
+                        <div class="driver-contact">
+                            <h4><i class="fas fa-user-tie"></i> Save Driver Contact</h4>
+                            <p>Save Kumar (Spacia Owner/Driver) contact to your phone for quick bookings</p>
+                            <div>
+                                <button class="btn btn-contact" onclick="saveContact('vcard')">
+                                    <i class="fas fa-address-card"></i>
+                                    Save Contact
+                                </button>
+                                <button class="btn btn-whatsapp" onclick="saveContact('whatsapp')">
+                                    <i class="fab fa-whatsapp"></i>
+                                    Save on WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="whatsapp-note">
                             <i class="fab fa-whatsapp"></i>
                             <strong>Quick Booking:</strong> Fill the form below and we'll open WhatsApp with your booking details pre-filled. Just tap "Send" to confirm!
@@ -921,7 +987,7 @@
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <p>info@spaciacab.com</p>
+                                <p>spaciacab@gmail.com</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1005,6 +1071,13 @@
         // WhatsApp number (without + or 00)
         const whatsappNumber = '94785657954';
         const phoneNumber = '+94785657954';
+        
+        // Driver contact information
+        const driverInfo = {
+            name: 'Kumar',
+            title: 'Spacia Owner/Driver',
+            phone: '+94785657954'
+        };
         
         // Fetch data from Google Sheet
         fetch(sheetURL)
@@ -1224,6 +1297,39 @@
             });
         }
         
+        // Save driver contact information
+        function saveContact(type) {
+            if (type === 'vcard') {
+                // Create vCard data
+                const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${driverInfo.name}
+ORG:${driverInfo.title}
+TEL:${driverInfo.phone}
+END:VCARD`;
+                
+                // Create and download vCard file
+                const blob = new Blob([vcardData], { type: 'text/vcard' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${driverInfo.name.replace(/\s+/g, '_')}.vcf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showNotification(`Contact card for ${driverInfo.name} downloaded successfully!`);
+            } else if (type === 'whatsapp') {
+                // Open WhatsApp with driver contact
+                const message = `Hi ${driverInfo.name}, I'd like to save your contact for future bookings with Spacia Cab Service.`;
+                const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                showNotification(`WhatsApp opened with ${driverInfo.name}'s contact!`);
+            }
+        }
+        
         // Calculate distance between selected locations
         function calculateDistance() {
             const from = document.getElementById('from').value;
@@ -1342,6 +1448,10 @@
                 currentCalculation.fare = 'N/A';
             }
             
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('trip-date').setAttribute('min', today);
+            
             // Show result section
             document.getElementById('result').style.display = 'block';
             
@@ -1356,12 +1466,34 @@
                 return;
             }
             
-            const message = `*Route Inquiry - Spacia Cab Service*%0A%0A` +
+            // Get trip date
+            const tripDate = document.getElementById('trip-date').value;
+            
+            // Validate trip date
+            if (!tripDate) {
+                document.getElementById('trip-date').closest('.form-group').classList.add('error');
+                showNotification('Please select your trip date', true);
+                return;
+            }
+            
+            // Format date for display
+            const dateObj = new Date(tripDate);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Clear any error state
+            document.getElementById('trip-date').closest('.form-group').classList.remove('error');
+            
+            const message = `*Trip Inquiry - Spacia Cab Service*%0A%0A` +
                 `*From:* ${currentCalculation['From']}%0A` +
                 `*To:* ${currentCalculation['To']}%0A` +
                 `*Distance:* ${currentCalculation['DISTANCE']}%0A` +
                 `*Route:* ${currentCalculation['ROUTE'] || 'Standard route'}%0A` +
-                `*Estimated Fare:* ${currentCalculation.fare}%0A%0A` +
+                `*Estimated Fare:* ${currentCalculation.fare}%0A` +
+                `*Trip Date:* ${formattedDate}%0A%0A` +
                 `I would like to book this trip. Please confirm availability.`;
             
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;

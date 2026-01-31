@@ -543,6 +543,12 @@
             padding: 15px;
             background-color: var(--light-gray);
             border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
         
         .contact-item i {
@@ -561,6 +567,28 @@
         .contact-item p {
             font-size: 14px;
             color: var(--light-text);
+        }
+        
+        .contact-item.phone-number a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item.phone-number a:hover {
+            color: var(--accent-color);
+        }
+        
+        .contact-item.email-address a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item.email-address a:hover {
+            color: var(--accent-color);
         }
         
         .whatsapp-note {
@@ -604,6 +632,66 @@
             margin: 0 5px;
             padding: 10px 20px;
             font-size: 14px;
+        }
+        
+        .quick-contact {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .quick-contact-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-hover);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 24px;
+        }
+        
+        .quick-contact-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .quick-contact-btn.whatsapp {
+            background-color: var(--secondary-color);
+        }
+        
+        .quick-contact-btn.whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        .quick-contact-btn.call {
+            background-color: var(--accent-color);
+        }
+        
+        .quick-contact-btn.call:hover {
+            background-color: #0b7dda;
+        }
+        
+        .quick-contact-btn.email {
+            background-color: #ea4335;
+        }
+        
+        .quick-contact-btn.email:hover {
+            background-color: #d33b2c;
+        }
+        
+        .quick-contact-btn.facebook {
+            background-color: #1877f2;
+        }
+        
+        .quick-contact-btn.facebook:hover {
+            background-color: #166fe5;
         }
         
         footer {
@@ -766,6 +854,17 @@
                 margin: 5px 0;
                 width: 100%;
             }
+            
+            .quick-contact {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .quick-contact-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -802,7 +901,7 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Distance Calculator</h2>
-                    <p>Check the distance between any two locations in Colombo</p>
+                    <p>Check the distance between any two locations</p>
                 </div>
                 
                 <div class="calculator-form">
@@ -857,11 +956,11 @@
                         <div class="fare-note">
                             <div class="fare-note-item">
                                 <i class="fas fa-info-circle"></i>
-                                <span>This is an estimated fare. The final fare may vary depending on the distance between the pickup and drop-off locations. Contact us via WhatsApp or mobile for the final quotation.</span>
+                                <span>This is an estimated fare. The final fare may vary depending on the distance between the pickup and drop-off locations. Contact via WhatsApp or call us for the final quotation.</span>
                             </div>
                             <div class="fare-note-item">
                                 <i class="fas fa-road"></i>
-                                <span>Prices exclude/without highway charges (if any, to be borne by the customer). </span>
+                                <span>Prices exclude/without highway charges (if any, to be borne by the customer).</span>
                             </div>
                         </div>
                         
@@ -976,18 +1075,22 @@
                     </div>
                     
                     <div class="contact-info">
-                        <div class="contact-item">
+                        <div class="contact-item phone-number">
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Phone</h4>
-                                <p>+94 78 565 7954</p>
+                                <a href="tel:+94785657954" onclick="trackPhoneClick()">
+                                    <p>+94 78 565 7954</p>
+                                </a>
                             </div>
                         </div>
-                        <div class="contact-item">
+                        <div class="contact-item email-address">
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <p>spaciacab@gmail.com</p>
+                                <a href="mailto:spaciacab@gmail.com" onclick="trackEmailClick()">
+                                    <p>spaciacab@gmail.com</p>
+                                </a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1009,6 +1112,22 @@
             </div>
         </section>
     </main>
+    
+    <!-- Quick Contact Buttons -->
+    <div class="quick-contact">
+        <a href="https://web.facebook.com/profile.php?id=61587009314525" class="quick-contact-btn facebook" target="_blank" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="mailto:spaciacab@gmail.com" class="quick-contact-btn email" onclick="trackEmailClick()" title="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="tel:+94785657954" class="quick-contact-btn call" onclick="trackPhoneClick()" title="Call Now">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/94785657954" class="quick-contact-btn whatsapp" target="_blank" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
     
     <footer>
         <div class="container">
@@ -1041,7 +1160,7 @@
                 <div class="footer-section">
                     <h3>Follow Us</h3>
                     <ul>
-                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://web.facebook.com/profile.php?id=61587009314525" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
                         <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
                         <li><a href="https://wa.me/94785657954" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
@@ -1071,13 +1190,43 @@
         // WhatsApp number (without + or 00)
         const whatsappNumber = '94785657954';
         const phoneNumber = '+94785657954';
+        const emailAddress = 'spaciacab@gmail.com';
+        const facebookUrl = 'https://web.facebook.com/profile.php?id=61587009314525';
         
         // Driver contact information
         const driverInfo = {
             name: 'Kumar',
             title: 'Spacia Owner/Driver',
-            phone: '+94785657954'
+            phone: '+94785657954',
+            email: 'spaciacab@gmail.com'
         };
+        
+        // Track phone clicks (optional analytics)
+        function trackPhoneClick() {
+            // You can add analytics tracking here
+            console.log('Phone number clicked');
+            
+            // Show notification
+            showNotification('Calling Spacia Cab Service...');
+        }
+        
+        // Track email clicks (optional analytics)
+        function trackEmailClick() {
+            // You can add analytics tracking here
+            console.log('Email address clicked');
+            
+            // Show notification
+            showNotification('Opening email client...');
+        }
+        
+        // Track Facebook clicks (optional analytics)
+        function trackFacebookClick() {
+            // You can add analytics tracking here
+            console.log('Facebook profile clicked');
+            
+            // Show notification
+            showNotification('Opening Facebook profile...');
+        }
         
         // Fetch data from Google Sheet
         fetch(sheetURL)
@@ -1306,6 +1455,8 @@ VERSION:3.0
 FN:${driverInfo.name}
 ORG:${driverInfo.title}
 TEL:${driverInfo.phone}
+EMAIL:${driverInfo.email}
+URL:${facebookUrl}
 END:VCARD`;
                 
                 // Create and download vCard file
@@ -1487,7 +1638,7 @@ END:VCARD`;
             // Clear any error state
             document.getElementById('trip-date').closest('.form-group').classList.remove('error');
             
-            const message = `*Trip Inquiry - Spacia Cab Service*%0A%0A` +
+            const message = `*Route Inquiry - Spacia Cab Service*%0A%0A` +
                 `*From:* ${currentCalculation['From']}%0A` +
                 `*To:* ${currentCalculation['To']}%0A` +
                 `*Distance:* ${currentCalculation['DISTANCE']}%0A` +
